@@ -1,21 +1,19 @@
-import Footer from "../components/Footer";
+import Fish from "../components/Fish";
 import Scene from "./Scene";
 import { BitmapText } from "pixi.js";
-
+import {center} from "../core/utils.js"
 export default class Play extends Scene {
   async onCreated() {
-    const footer = new Footer();
-    footer.x = -window.innerWidth / 2;
-    footer.y = window.innerHeight / 2 - footer.height;
-    this.addChild(footer);
+    const fish = new Fish();
+   //center(fish,{widht:fish.width,height:fish.height})
+    fish.anchor.set(0.5,0.5);
+    
+    
+    this.addChild(fish);
+    fish.interactive = true;
+   fish.buttonMode = true;
 
-    const text = new BitmapText("Hello, PIXI", {
-      fontName: "Desyrel",
-    });
-
-    text.anchor.set(0.5);
-
-    this.addChild(text);
+   fish.on("pointerdown",fish.expand)
   }
 
   /**
